@@ -3,6 +3,7 @@ import queries
 import ui
 
 
+
 class MovieSearchAppOK:
     """Movie search application class."""
 
@@ -10,11 +11,13 @@ class MovieSearchAppOK:
         """Initialize the application components."""
         self.db: db.DBConnection = db.DBConnection()
         self.ui: ui.UI = ui.UI()
-        self.queries: queries.Queries = queries.Queries()
+
 
     def start(self) -> None:
         """Start the application."""
         self.db.connect()
+
+
         while True:
             self.ui.show_menu()
             choice: str = self.ui.get_user_choice()
@@ -31,13 +34,13 @@ class MovieSearchAppOK:
             else:
                 print("Invalid choice. Try again.")
 
-
         self.db.close()
+
 
     def search_movies_by_keyword(self) -> None:
         """Search for movies by a keyword."""
         keyword: str = self.ui.get_search_keyword()
-        query: str = self.queries.search_movies_by_keyword()
+        query: str = queries.search_movies_by_keyword  # Fix the issue here
         self.db.execute_query(query, ('%' + keyword + '%',))
         movies: list[tuple[str, str]] = self.db.fetchall()
         self.db.record_query(keyword, "keyword")
@@ -55,7 +58,7 @@ class MovieSearchAppOK:
         years: list[str] = self.db.fetch_years_for_genre(genre)
         year: str = self.ui.get_year_choice(years)
 
-        query: str = self.queries.search_by_genre_and_year()
+        query: str = queries.search_by_genre_and_year  # Fix the issue here
         self.db.execute_query(query, (genre, year))
         movies: list[tuple[str, str]] = self.db.fetchall()
         self.ui.display_movies(movies)
@@ -63,7 +66,7 @@ class MovieSearchAppOK:
 
     def view_popular_queries(self) -> None:
         """View the most popular search queries."""
-        query: str = self.queries.get_popular_queries()
+        query: str = queries.get_popular_queries  # Fix the issue here
         self.db.execute_query(query)
         popular_queries: list[tuple[str, int]] = self.db.fetchall()
         self.ui.display_popular_queries(popular_queries)

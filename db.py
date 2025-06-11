@@ -25,7 +25,7 @@ class DBConnection:
         try:
             self.connection = pymysql.connect(**self.dbconfig, charset='utf8mb4')
             self.cursor = self.connection.cursor()
-            print("Connection successful!")
+            #print("Connection successful!")
         except pymysql.MySQLError as e:
             print(f"Database error: {e}")
 
@@ -35,7 +35,7 @@ class DBConnection:
             self.cursor.close()
         if self.connection:
             self.connection.close()
-            print("Connection closed.")
+           # print("Connection closed.")
 
     def execute_query(self, query: str, params: tuple = None) -> None:
         """Execute a query."""

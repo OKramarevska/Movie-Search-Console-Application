@@ -1,13 +1,19 @@
 class UI:
     """User Interface class for displaying menus and interacting with the user."""
 
+    def __init__(self):
+        """Initialize the menu items."""
+        self.menu_items = [
+            "Welcome to Movie World! Enjoy your search!",
+            "1. Search movies by keyword",
+            "2. Search movies by genre and year",
+            "3. View popular search queries",
+            "4. Exit"
+        ]
+
     def show_menu(self) -> None:
         """Display the main menu to the user."""
-        print("Welcome to Movie World! Enjoy your search!")
-        print("1. Search movies by keyword")
-        print("2. Search movies by genre and year")
-        print("3. View popular search queries")
-        print("4. Exit")
+        print(*self.menu_items, sep="\n")
 
     def get_user_choice(self) -> str:
         """Get the user's choice from the menu."""
